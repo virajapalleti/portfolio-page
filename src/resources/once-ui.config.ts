@@ -18,8 +18,10 @@ const baseURL: string = "https://virajapalleti.github.io/portfolio-page";
 
 const routes: RoutesConfig = {
   "/": true,
-  "/about": true,
+  "/experience": true,
   "/work": true,
+  "/honors": true,
+  "/about": false,
   "/blog": false,
   "/gallery": false,
 };

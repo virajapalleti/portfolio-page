@@ -1,5 +1,4 @@
 import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
-import { Row, Text, Icon, IconButton } from "@once-ui-system/core";
 
 const person: Person = {
   firstName: "Viraja",
@@ -43,30 +42,25 @@ const social: Social = [
 const home: Home = {
   path: "/",
   image: "/images/og/home.jpg",
-  label: "Home",
+  label: "About",
   title: `${person.name}`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
+  description: `Portfolio of ${person.name} — CS undergrad based in Delhi.`,
   headline: <></>,
   featured: {
     display: false,
     title: <></>,
     href: "",
   },
-  subline: (
-    <>
-      Hi, I'm {person.firstName} — a CS undergrad based in Delhi. I build things that are useful,
-      interesting, or ideally both.
-    </>
-  ),
+  subline: <></>,
 };
 
 const about: About = {
-  path: "/about",
+  path: "/",
   label: "About",
-  title: `About – ${person.name}`,
+  title: `${person.name}`,
   description: `Meet ${person.name}, ${person.role} from Delhi, India`,
   tableOfContent: {
-    display: true,
+    display: false,
     subItems: false,
   },
   avatar: {
@@ -98,15 +92,15 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "IIIT Hyderabad — LTRC",
+        company: "IIIT Hyderabad — Language Technologies Research Centre (LTRC)",
         timeframe: "May – Aug 2026",
         role: "Research Intern",
         achievements: [
           <>
             Developing an automatic prosodic phrase classifier for English intonational categories,
-            with a custom-annotated ToBI dataset and full speech processing pipeline.
+            with a custom-annotated ToBI dataset and a full speech processing pipeline.
           </>,
-          <>Advisor: Prof. Chiranjeevi Yarra</>,
+          <>Advisor: Prof. Chiranjeevi Yarra.</>,
         ],
         images: [],
       },
@@ -119,12 +113,12 @@ const about: About = {
       {
         name: "Shiv Nadar University, Delhi NCR",
         description: (
-          <>B.Tech in Computer Science and Engineering, Second Year — GPA: 7.8 (Aug 2024 – Present)</>
+          <>B.Tech in Computer Science and Engineering, Second Year (Aug 2024 – Present)</>
         ),
       },
       {
         name: "Narayana Junior College, Hyderabad",
-        description: <>12th Grade: 95.2% | JEE Mains: 96.5 Percentile (May 2024)</>,
+        description: <>12th Grade: 95.2% · JEE Mains: 96.5 Percentile (May 2024)</>,
       },
     ],
   },
@@ -151,7 +145,7 @@ const about: About = {
         images: [],
       },
       {
-        title: "Web/Backend",
+        title: "Web / Backend",
         description: <>Flask, React, Node</>,
         tags: [],
         images: [],

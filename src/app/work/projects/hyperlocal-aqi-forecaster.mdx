@@ -1,7 +1,7 @@
 ---
 title: "Hyperlocal AQI Forecaster"
 publishedAt: "2024-12-01"
-summary: "A hyperlocal air quality forecasting dashboard for Delhi using OpenAQ, Open-Meteo, pandas, XGBoost, and Plotly Dash."
+summary: "An air quality forecasting dashboard for Delhi, built on OpenAQ and Open-Meteo data with XGBoost predictions and a Plotly Dash frontend."
 images: []
 team: []
 link: "https://github.com/virajapalleti/hyperlocal-aqi-forecaster"
@@ -9,8 +9,10 @@ link: "https://github.com/virajapalleti/hyperlocal-aqi-forecaster"
 
 ## Overview
 
-A hyperlocal air quality forecasting dashboard for Delhi using OpenAQ, Open-Meteo, pandas, XGBoost, and Plotly Dash.
+City-wide AQI averages hide the fact that pollution in Delhi varies sharply from one neighbourhood to the next. This project pulls hyperlocal sensor data from OpenAQ and weather features from Open-Meteo, then trains an XGBoost model to forecast AQI at the station level.
+
+The frontend is a Plotly Dash dashboard so results are readable rather than trapped in a notebook.
 
 ## Tech Stack
 
-- Python, Jupyter, XGBoost, Plotly Dash, pandas
+Python, XGBoost, pandas, Plotly Dash, OpenAQ API, Open-Meteo API

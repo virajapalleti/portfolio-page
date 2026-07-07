@@ -1,74 +1,140 @@
 import {
-  Heading,
-  Text,
   Button,
-  RevealFx,
   Column,
+  Heading,
+  IconButton,
+  Meta,
   Row,
   Schema,
-  Meta,
+  Tag,
+  Text,
 } from "@once-ui-system/core";
-import { home, about, person, baseURL } from "@/resources";
-import { Projects } from "@/components/work/Projects";
+import { about, baseURL, home, person, social } from "@/resources";
+import React from "react";
 
 export async function generateMetadata() {
   return Meta.generate({
     title: home.title,
     description: home.description,
     baseURL: baseURL,
-    path: home.path,
+    path: "/",
     image: home.image,
   });
 }
 
-export default function Home() {
+export default function AboutHome() {
   return (
-    <Column maxWidth="m" gap="xl" paddingY="12" horizontal="center">
+    <Column maxWidth="m" paddingTop="24">
       <Schema
         as="webPage"
         baseURL={baseURL}
-        path={home.path}
         title={home.title}
         description={home.description}
-        image={`${baseURL}${home.path}`}
+        path="/"
         author={{
           name: person.name,
-          url: `${baseURL}${about.path}`,
-          image: `${baseURL}${person.avatar}`,
+          url: baseURL,
+          image: "",
         }}
       />
-      <Column fillWidth horizontal="center" gap="m">
-        <Column maxWidth="s" horizontal="center" align="center">
-          <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
-            <Heading wrap="balance" variant="display-strong-l">
-              {home.headline}
-            </Heading>
-          </RevealFx>
-          <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
-            <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
-              {home.subline}
-            </Text>
-          </RevealFx>
-          <RevealFx paddingTop="12" delay={0.4} horizontal="center" paddingLeft="12">
-            <Button
-              id="about"
-              data-border="rounded"
-              href={about.path}
-              variant="secondary"
-              size="m"
-              weight="default"
-              arrowIcon
-            >
-              <Row gap="8" vertical="center" paddingRight="4">
-                {about.title}
-              </Row>
-            </Button>
-          </RevealFx>
+
+      {/* Name + role + social */}
+      <Column fillWidth horizontal="center" align="center" marginBottom="xl">
+        <Heading variant="display-strong-xl">{person.name}</Heading>
+        <Text variant="display-default-xs" onBackground="neutral-weak" marginTop="8">
+          {person.role} · Delhi, India
+        </Text>
+        <Row paddingTop="20" gap="8" wrap horizontal="center" data-border="rounded">
+          {social
+            .filter((item) => item.essential)
+            .map(
+              (item) =>
+                item.link && (
+                  <React.Fragment key={item.name}>
+                    <Row s={{ hide: true }}>
+                      <Button
+                        href={item.link}
+                        prefixIcon={item.icon}
+                        label={item.name}
+                        size="s"
+                        weight="default"
+                        variant="secondary"
+                      />
+                    </Row>
+                    <Row hide s={{ hide: false }}>
+                      <IconButton
+                        size="l"
+                        href={item.link}
+                        icon={item.icon}
+                        variant="secondary"
+                      />
+                    </Row>
+                  </React.Fragment>
+                ),
+            )}
+        </Row>
+      </Column>
+
+      {/* Intro */}
+      <Column fillWidth gap="m" marginBottom="xl" horizontal="center">
+        <Column maxWidth={40} textVariant="body-default-l" gap="m">
+          {about.intro.description}
         </Column>
       </Column>
-      <RevealFx translateY="16" delay={0.6}>
-        <Projects />
-      </RevealFx>
+
+      {/* Education */}
+      <Column fillWidth horizontal="center" marginBottom="xl">
+        <Column maxWidth={40} fillWidth>
+          <Heading as="h2" variant="display-strong-s" marginBottom="m">
+            Education
+          </Heading>
+          <Column fillWidth gap="16">
+            {about.studies.institutions.map((institution, index) => (
+              <Column
+                key={`${institution.name}-${index}`}
+                fillWidth
+                gap="4"
+                padding="20"
+                radius="l"
+                border="neutral-alpha-weak"
+                background="neutral-alpha-weak"
+              >
+                <Text variant="heading-strong-m">{institution.name}</Text>
+                <Text variant="body-default-s" onBackground="neutral-weak">
+                  {institution.description}
+                </Text>
+              </Column>
+            ))}
+          </Column>
+        </Column>
+      </Column>
+
+      {/* Technical skills */}
+      <Column fillWidth horizontal="center" marginBottom="xl">
+        <Column maxWidth={40} fillWidth>
+          <Heading as="h2" variant="display-strong-s" marginBottom="m">
+            {about.technical.title}
+          </Heading>
+          <Column fillWidth gap="16">
+            {about.technical.skills.map((skill, index) => (
+              <Column
+                key={`${skill.title}-${index}`}
+                fillWidth
+                gap="4"
+                padding="16"
+                radius="m"
+                border="neutral-alpha-weak"
+                background="neutral-alpha-weak"
+              >
+                <Text variant="heading-strong-s">{skill.title}</Text>
+                <Text variant="body-default-m" onBackground="neutral-weak">
+                  {skill.description}
+                </Text>
+              </Column>
+            ))}
+          </Column>
+        </Column>
+      </Column>
     </Column>
   );
 }

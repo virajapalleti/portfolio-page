@@ -1,7 +1,7 @@
 ---
 title: "Fake News Detector"
 publishedAt: "2024-11-01"
-summary: "AI/ML project to detect fake news using classification models."
+summary: "A classification pipeline that flags fake news articles. Text preprocessing, TF-IDF features, and standard scikit-learn classifiers benchmarked against each other."
 images: []
 team: []
 link: "https://github.com/virajapalleti/fake-news-detector"
@@ -9,8 +9,10 @@ link: "https://github.com/virajapalleti/fake-news-detector"
 
 ## Overview
 
-AI/ML project to detect fake news from correct ones using classification models.
+A supervised classifier that separates fake news from real reporting. Articles are cleaned, tokenised, and turned into TF-IDF feature vectors, then fed into a few scikit-learn models (logistic regression, naive Bayes, etc.) benchmarked against each other on accuracy and F1.
+
+Built as a hands-on pass at applied NLP fundamentals before moving to heavier transformer-based approaches.
 
 ## Tech Stack
 
-- Python, Scikit-learn
+Python, scikit-learn, pandas, NLTK

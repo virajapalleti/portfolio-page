@@ -1,7 +1,7 @@
 ---
-title: "Hermes: Low-Communication Distributed LLM Training"
+title: "Hermes"
 publishedAt: "2025-06-01"
-summary: "Distributed training system with GPU-level parallelism via custom CUDA kernels, cutting gradient-compression latency from 160ms to 3.5ms (46x) and communication bandwidth up to 13,000x versus standard DDP."
+summary: "A low-communication distributed LLM training system. Custom CUDA kernels drop gradient-compression latency from 160ms to 3.5ms, and communication bandwidth by up to 13,000x versus standard DDP."
 images: []
 team: []
 link: "https://github.com/virajapalleti"
@@ -9,12 +9,14 @@ link: "https://github.com/virajapalleti"
 
 ## Overview
 
-Designed a distributed training system with GPU-level parallelism via custom CUDA kernels, cutting gradient-compression latency from 160ms to 3.5ms (46x) and communication bandwidth up to 13,000x versus standard distributed data parallel (DDP).
+Standard distributed data parallel (DDP) spends most of its time moving gradients across the network, which becomes the bottleneck the moment you leave a single-node setup. Hermes attacks that at the kernel level.
 
-Introduces heterogeneity-aware sharding enabling LLM training across mixed hardware over commodity WiFi.
+The system implements gradient compression in custom CUDA kernels running at GPU granularity, cutting compression latency from 160ms to 3.5ms (about 46x) and shrinking communication bandwidth by up to 13,000x compared to DDP.
 
-**Paper in progress.**
+On top of that, it introduces heterogeneity-aware sharding — dividing work across mixed hardware so LLM training runs across a fleet of non-matching GPUs connected over commodity WiFi, not just a homogeneous cluster.
+
+Paper in progress.
 
 ## Tech Stack
 
-- CUDA, Python, PyTorch, Distributed Computing
+CUDA, Python, PyTorch, Distributed Systems

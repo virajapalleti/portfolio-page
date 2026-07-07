@@ -1,12 +1,11 @@
 "use client";
 
 import {
-  AvatarGroup,
-  Carousel,
   Column,
   Flex,
   Heading,
   IconButton,
+  Row,
   SmartLink,
   Text,
 } from "@once-ui-system/core";
@@ -24,68 +23,52 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   href,
-  images = [],
   title,
   content,
   description,
-  avatars,
   link,
 }) => {
   return (
-    <Column fillWidth gap="m">
-      <Carousel
-        sizes="(max-width: 960px) 100vw, 960px"
-        items={images.map((image) => ({
-          slide: image,
-          alt: title,
-        }))}
-      />
-      <Flex
-        s={{ direction: "column" }}
-        fillWidth
-        paddingX="s"
-        paddingTop="12"
-        paddingBottom="24"
-        gap="l"
-      >
+    <Column
+      fillWidth
+      gap="12"
+      padding="24"
+      radius="l"
+      border="neutral-alpha-weak"
+      background="neutral-alpha-weak"
+    >
+      <Row fillWidth horizontal="between" vertical="center" gap="12">
         {title && (
-          <Flex flex={5}>
-            <Heading as="h2" wrap="balance" variant="heading-strong-xl">
-              {title}
-            </Heading>
-          </Flex>
+          <Heading as="h2" wrap="balance" variant="heading-strong-l">
+            {title}
+          </Heading>
         )}
-        {(avatars?.length > 0 || description?.trim() || content?.trim()) && (
-          <Column flex={7} gap="16">
-            {avatars?.length > 0 && <AvatarGroup avatars={avatars} size="m" reverse />}
-            {description?.trim() && (
-              <Text wrap="balance" variant="body-default-s" onBackground="neutral-weak">
-                {description}
-              </Text>
-            )}
-            <Flex gap="24" wrap>
-              {content?.trim() && (
-                <SmartLink
-                  suffixIcon="arrowRight"
-                  style={{ margin: "0", width: "fit-content" }}
-                  href={href}
-                >
-                  <Text variant="body-default-s">Read case study</Text>
-                </SmartLink>
-              )}
-              {link && (
-                <IconButton
-                  href={link}
-                  icon="github"
-                  variant="secondary"
-                  size="s"
-                  tooltip="View on GitHub"
-                />
-              )}
-            </Flex>
-          </Column>
+        {link && (
+          <IconButton
+            href={link}
+            icon="github"
+            variant="ghost"
+            size="s"
+            tooltip="View on GitHub"
+          />
         )}
-      </Flex>
+      </Row>
+      {description?.trim() && (
+        <Text wrap="balance" variant="body-default-m" onBackground="neutral-weak">
+          {description}
+        </Text>
+      )}
+      {content?.trim() && (
+        <Flex paddingTop="4">
+          <SmartLink
+            suffixIcon="arrowRight"
+            style={{ margin: "0", width: "fit-content" }}
+            href={href}
+          >
+            <Text variant="body-default-s">Read more</Text>
+          </SmartLink>
+        </Flex>
+      )}
     </Column>
   );
 };

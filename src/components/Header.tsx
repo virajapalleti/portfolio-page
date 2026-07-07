@@ -11,7 +11,7 @@ import styles from "./Header.module.scss";
 
 type TimeDisplayProps = {
   timeZone: string;
-  locale?: string; // Optionally allow locale, defaulting to 'en-GB'
+  locale?: string;
 };
 
 const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = "en-GB" }) => {
@@ -41,6 +41,8 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = "en-GB" })
 };
 
 export default TimeDisplay;
+
+const RESUME_PATH = "/resume.pdf";
 
 export const Header = () => {
   const pathname = usePathname() ?? "";
@@ -72,10 +74,8 @@ export const Header = () => {
           position: "fixed",
         }}
       >
-        <Row paddingLeft="12" fillWidth vertical="center" textVariant="body-default-s">
-          {display.location && <Row s={{ hide: true }}>{person.location}</Row>}
-        </Row>
-        <Row fillWidth horizontal="center">
+        <Row paddingLeft="12" fillWidth vertical="center" textVariant="body-default-s" />
+        <Row fillWidth horizontal="center" gap="8">
           <Row
             background="page"
             border="neutral-alpha-weak"
@@ -86,48 +86,30 @@ export const Header = () => {
             zIndex={1}
           >
             <Row gap="4" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
-              {routes["/"] && (
-                <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
-              )}
-              <Line background="neutral-alpha-medium" vert maxHeight="24" />
-              {routes["/about"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="person"
-                      href="/about"
-                      label={about.label}
-                      selected={pathname === "/about"}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="person"
-                      href="/about"
-                      selected={pathname === "/about"}
-                    />
-                  </Row>
-                </>
-              )}
-              {routes["/work"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="grid"
-                      href="/work"
-                      label={work.label}
-                      selected={pathname.startsWith("/work")}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="grid"
-                      href="/work"
-                      selected={pathname.startsWith("/work")}
-                    />
-                  </Row>
-                </>
-              )}
+              <ToggleButton
+                prefixIcon="person"
+                href="/"
+                label="About"
+                selected={pathname === "/"}
+              />
+              <ToggleButton
+                prefixIcon="briefcase"
+                href="/experience"
+                label="Work experience"
+                selected={pathname.startsWith("/experience")}
+              />
+              <ToggleButton
+                prefixIcon="grid"
+                href="/work"
+                label="Projects"
+                selected={pathname.startsWith("/work")}
+              />
+              <ToggleButton
+                prefixIcon="trophy"
+                href="/honors"
+                label="Honors"
+                selected={pathname.startsWith("/honors")}
+              />
               {display.themeSwitcher && (
                 <>
                   <Line background="neutral-alpha-medium" vert maxHeight="24" />
@@ -136,20 +118,30 @@ export const Header = () => {
               )}
             </Row>
           </Row>
-        </Row>
-        <Flex fillWidth horizontal="end" vertical="center">
-          <Flex
-            paddingRight="12"
-            horizontal="end"
-            vertical="center"
-            textVariant="body-default-s"
-            gap="20"
+          <Row
+            background="page"
+            border="neutral-alpha-weak"
+            radius="m-4"
+            shadow="l"
+            padding="4"
+            horizontal="center"
+            zIndex={1}
           >
-            <Flex s={{ hide: true }}>
-              {display.time && <TimeDisplay timeZone={person.location} />}
-            </Flex>
-          </Flex>
-        </Flex>
+            <a
+              href={RESUME_PATH}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none" }}
+            >
+              <ToggleButton
+                label="Resume"
+                prefixIcon="document"
+                selected={false}
+              />
+            </a>
+          </Row>
+        </Row>
+        <Flex fillWidth horizontal="end" vertical="center" />
       </Row>
     </>
   );
