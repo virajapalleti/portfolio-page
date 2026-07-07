@@ -22,7 +22,16 @@ export const Footer = () => {
         }}
       >
         <Text variant="body-default-s" onBackground="neutral-weak">
-          © {currentYear} {person.name}
+          © {currentYear} {person.name} · Built with{" "}
+          <a
+            href="https://github.com/once-ui-system/magic-portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            Magic Portfolio
+          </a>{" "}
+          by Once UI (CC BY-NC 4.0)
         </Text>
         <Row gap="16">
           {social.map(

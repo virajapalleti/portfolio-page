@@ -42,7 +42,7 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = "en-GB" })
 
 export default TimeDisplay;
 
-const RESUME_PATH = "/resume.pdf";
+const RESUME_PATH = `${process.env.NODE_ENV === "production" ? "/portfolio-page" : ""}/resume.pdf`;
 
 export const Header = () => {
   const pathname = usePathname() ?? "";
